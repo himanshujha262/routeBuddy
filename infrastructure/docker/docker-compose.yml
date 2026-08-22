@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # 1. PostgreSQL with PostGIS Geospatial Extension
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: routbuddy-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: routbuddy_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - routbuddy-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d routbuddy_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. Redis for Geospatial Indexing, Telemetry Cache, & Pub/Sub
+  redis:
+    image: redis:7-alpine
+    container_name: routbuddy-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    networks:
+      - routbuddy-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 3. Python / FastAPI AI & ML Service
+  ai-service:
+    build:
+      context: ../../ai-service
+      dockerfile: Dockerfile
+    container_name: routbuddy-ai-service
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - routbuddy-network
+    depends_on:
+      - redis
+
+  # 4. Spring Boot 3.3 Modular Monolith API Gateway & Core Engine
+  backend:
+    build:
+      context: ../../backend
+      dockerfile: routbuddy-bootstrap/Dockerfile
+    container_name: routbuddy-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/routbuddy_db
+      DB_USER: postgres
+      DB_PASSWORD: postgrespassword
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      AI_SERVICE_URL: http://ai-service:8000
+      JWT_SECRET: routbuddy_very_secure_jwt_secret_key_that_is_at_least_256_bits_long_2026
+      QR_SECRET: routbuddy_hmac_sha256_secret_key_for_boarding_tokens_2026
+    networks:
+      - routbuddy-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ai-service:
+        condition: service_started
+
+  # 5. Next.js 14 Admin & Operations Portal
+  frontend-admin:
+    build:
+      context: ../../frontend-admin
+      dockerfile: Dockerfile
+    container_name: routbuddy-admin
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080
+      NEXT_PUBLIC_AI_URL: http://localhost:8000
+    networks:
+      - routbuddy-network
+    depends_on:
+      - backend
+
+networks:
+  routbuddy-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+  redisdata:

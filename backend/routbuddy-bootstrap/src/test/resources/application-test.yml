@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: routbuddy-platform-test
+
+  datasource:
+    url: jdbc:h2:mem:routbuddy_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  flyway:
+    enabled: false
+
+routbuddy:
+  jwt:
+    secret: routbuddy_test_jwt_secret_key_which_is_sufficiently_long_for_hmac_sha256_tests
+    expiration-ms: 3600000 # 1 hour
+    refresh-expiration-ms: 86400000 # 24 hours
