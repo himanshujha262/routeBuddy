@@ -40,6 +40,16 @@
         <module>routbuddy-routes</module>
         <module>routbuddy-trips</module>
         <module>routbuddy-bookings</module>
+        <module>routbuddy-payments</module>
+        <module>routbuddy-subscriptions</module>
+        <module>routbuddy-matching</module>
+        <module>routbuddy-locations</module>
+        <module>routbuddy-notifications</module>
+        <module>routbuddy-ratings</module>
+        <module>routbuddy-safety</module>
+        <module>routbuddy-complaints</module>
+        <module>routbuddy-analytics</module>
+        <module>routbuddy-admin</module>
         <module>routbuddy-bootstrap</module>
     </modules>
 
@@ -84,6 +94,56 @@
             <dependency>
                 <groupId>com.routbuddy</groupId>
                 <artifactId>routbuddy-bookings</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-payments</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-subscriptions</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-matching</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-locations</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-notifications</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-ratings</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-safety</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-complaints</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-analytics</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.routbuddy</groupId>
+                <artifactId>routbuddy-admin</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

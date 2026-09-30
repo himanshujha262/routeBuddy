@@ -1,3 +1,4 @@
+
 -- RoutBuddy V1 Database Migration: Auth, Roles, Users, Refresh Tokens, and OTP Verifications
 
 -- 1. Roles Table

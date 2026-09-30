@@ -48,6 +48,46 @@
             <groupId>com.routbuddy</groupId>
             <artifactId>routbuddy-bookings</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-payments</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-subscriptions</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-matching</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-locations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-notifications</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-ratings</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-safety</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-complaints</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-analytics</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.routbuddy</groupId>
+            <artifactId>routbuddy-admin</artifactId>
+        </dependency>
 
         <!-- Spring Boot Starters -->
         <dependency>
